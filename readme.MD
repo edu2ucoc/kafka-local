@@ -15,6 +15,10 @@ L bakery-producer.py
 L bakery-consumer.py
 
 # 카프카 내에서 CLI 확인
+- docker상 컨테이너 내부의 카프카 위치
+- cd /opt/kafka/bin
+- ls
+    - 각종 쉘 프로그램 확인 가능함
 ```
 # 토픽 생성
 kafka-topic.sh --create --topic 토픽명 --bootstrap-server 127.0.0.1:9092 --partitions 1 --replication-factor 1
