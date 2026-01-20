@@ -95,8 +95,20 @@ kafka-console-consumer.sh --topic bk-orders --bootstrap-server 127.0.0.1:9092
         - kafka ui > kafka connect > Create new connector 
             - GUI 방식 -> 불안정함
             - 이름, 내용 등록
-        - 터미널/커맨드라인/파워쉘 등에서 직접 등록
-            - curl -X POST http://localhost:8083/connectors/ -H "Content-Type: application/json" -d @s3_conn_config.json
+        - 터미널/파워쉘 등에서 직접 등록
+            - 윈도우용
+            ```
+            curl.exe -X POST http://localhost:8083/connectors/ -H "Content-Type: application/json" -d "@s3_conn_config.json"
+            
+            or
+
+            Invoke-RestMethod -Uri "http://localhost:8083/connectors/" -Method Post -ContentType "application/json" -InFile "s3_conn_config.json"
+            ```
+            - 맥용
+            ```
+                curl -X POST http://localhost:8083/connectors/ -H "Content-Type: application/json" -d @s3_conn_config.json
+            ```
+
 
 - kafka connect
     - S3에 적제 담당
