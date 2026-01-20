@@ -97,4 +97,22 @@ services:
         /etc/confluent/docker/run
     depends_on:
       - kafka
+
+  logstash:
+    build: 
+      context: ./logstash
+    container_name: logstash
+    volumes:
+      - ./pipeline/:/usr/share/logstash/pipeline/
+    environment:
+      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
+      # S3 접속용
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      # [신규] AWS OpenSearch 접속용 환경변수 전달
+      AWS_OPENSEARCH_HOST: ${AWS_OPENSEARCH_HOST}
+      AWS_OPENSEARCH_USER: ${AWS_OPENSEARCH_USER}
+      AWS_OPENSEARCH_PASS: ${AWS_OPENSEARCH_PASS}
+    depends_on:
+      - kafka
   

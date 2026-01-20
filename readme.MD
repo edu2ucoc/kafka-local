@@ -128,9 +128,19 @@ kafka-console-consumer.sh --topic bk-orders --bootstrap-server 127.0.0.1:9092
 /
 ├── docker-compose.yaml   # [유지]컨테이너 구성 + [추가] 서비스에 logstash 추가
 ├── web_log_producer.py   # [유지]로그 발생기
-├── .env                  # [유지]AWS 엑세스키 + [추가] opensearch 마스터 ID/PW
+├── .env                  # [유지]AWS 엑세스키 + [v 추가] opensearch 마스터 ID/PW
 ├── pipeline
 |       L logstash.conf   # [신규] 동시 전송 규칙 구성 
 ├── logstash
 |       L Dockerfile      # [신규] logstash에 대한 이미지
 ├── 기타 파일 유지 (*.py)
+
+## .env 
+```
+AWS_ACCESS_KEY_ID=..
+AWS_SECRET_ACCESS_KEY=..
+# 추가분
+AWS_OPENSEARCH_HOST=.......amazonaws.com
+AWS_OPENSEARCH_USER=..
+AWS_OPENSEARCH_PASS=..
+```
