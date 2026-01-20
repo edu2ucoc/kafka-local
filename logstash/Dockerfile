@@ -1,0 +1,1 @@
+FROM opensearchproject/logstash-oss-with-opensearch-output-plugin:8.6.1
