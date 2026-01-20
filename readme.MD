@@ -126,13 +126,13 @@ kafka-console-consumer.sh --topic bk-orders --bootstrap-server 127.0.0.1:9092
 
 ## 구조
 /
-├── docker-compose.yaml   # [유지]컨테이너 구성 + [추가] 서비스에 logstash 추가
+├── docker-compose.yaml   # [유지]컨테이너 구성 + [v 추가] 서비스에 logstash 추가
 ├── web_log_producer.py   # [유지]로그 발생기
 ├── .env                  # [유지]AWS 엑세스키 + [v 추가] opensearch 마스터 ID/PW
 ├── pipeline
 |       L logstash.conf   # [신규] 동시 전송 규칙 구성 
 ├── logstash
-|       L Dockerfile      # [신규] logstash에 대한 이미지
+|       L Dockerfile      # [v 신규] logstash에 대한 이미지
 ├── 기타 파일 유지 (*.py)
 
 ## .env 
@@ -143,4 +143,33 @@ AWS_SECRET_ACCESS_KEY=..
 AWS_OPENSEARCH_HOST=.......amazonaws.com
 AWS_OPENSEARCH_USER=..
 AWS_OPENSEARCH_PASS=..
+```
+
+## docker-compose.yaml 추가
+```
+서비스
+...
+
+logstash:
+    # 도커 파일로 부터 빌드후 이미지를 대상으로 컨테이너 구성 -> --build (1회)
+    build: 
+      context: ./logstash
+    container_name: logstash
+    # 설정 파일(conf)을 외부에서 작성된것이 컨테이너 내부로 공유됨 -> logstash의 설정이됨
+    # 여기에 s3, opensearch에 동시 업로드하는 구성이 세팅됨
+    volumes:
+      - ./pipeline/:/usr/share/logstash/pipeline/
+    environment:
+      # 자바로 구성된 프로그램 => logstash => 자비 힙 메모리 설정(운영)
+      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
+      # AWS 접속 정보 -> .env를 알아서 읽어서 세팅함
+      # S3 접속용 (엑세스키)
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      # AWS OpenSearch 접속용 환경변수 전달 (마스터 계정)
+      AWS_OPENSEARCH_HOST: ${AWS_OPENSEARCH_HOST}
+      AWS_OPENSEARCH_USER: ${AWS_OPENSEARCH_USER}
+      AWS_OPENSEARCH_PASS: ${AWS_OPENSEARCH_PASS}
+    depends_on:
+      - kafka
 ```
