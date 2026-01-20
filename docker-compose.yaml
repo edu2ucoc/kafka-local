@@ -60,6 +60,7 @@ services:
     environment:
       CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: "false"
       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+      # 도커내 내부 통신 프로토코명으로 카프카 서버 주소 세팅
       CONNECT_BOOTSTRAP_SERVERS: kafka:29092
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: "connect-group"
@@ -68,6 +69,8 @@ services:
       CONNECT_STATUS_STORAGE_TOPIC: "connect-status"
 
       # [추가된 부분] 단일 브로커 환경을 위한 복제 계수 설정 (기본값 3 -> 1)
+      # 토픽별 REPLICATION_FACTOR에 동일하게 구성
+      # 토픽 "web_logs:파티션수:복제개수" =>"web_logs" == "web_logs:1:1"
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
