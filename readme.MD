@@ -111,4 +111,15 @@ kafka-console-consumer.sh --topic bk-orders --bootstrap-server 127.0.0.1:9092
 
 
 - kafka connect
-    - S3에 적제 담당
+    - 데이터(로그(도메인별), 뉴스, ... ) 발생 => 카프카 프로듀서를 통해 여러곳에서 동시 다발적으로 카프카에 전송 => 카프카 커넥터 => S3에 자동 적제됨 (Data Lake)
+    - 만약, s3 적제 하면서 다른 서비스에 추가로 저장등 작업을 원하면 -> Logstash, FLuent bit등 사용 동시에 멀티 작업에 대한 구성 필요
+
+## kafka 서버 -> Logstash(ELK활용) -> s3  and 전처리(ETL)? -> opensearch : 동시전송
+## 구성
+    - Logstash에 서비스 설치
+    - 패턴 구성 (동시 처리에 대한 패턴 정의)
+        - 1. s3 -> raw 데이터 보관용
+        - 2. opensearch -> 검색분석용
+        - 3. athena -> 분석용
+        - ....
+    - opensearch에 저장된 데이터 -> ariflow은 스케줄을 통해서 특정 주기별로 후속작업 진행(배치 패턴)
