@@ -91,7 +91,12 @@ kafka-console-consumer.sh --topic bk-orders --bootstrap-server 127.0.0.1:9092
                 "path.format": "'year'=YYYY/'month'=MM/'day'=dd/'hour'=HH",
                 버킷/토픽/토픽명/2026/01/20/10/....
             ```
-        
+    - 패턴 등록 -> 커넥션 정보 등록
+        - kafka ui > kafka connect > Create new connector 
+            - GUI 방식 -> 불안정함
+            - 이름, 내용 등록
+        - 터미널/커맨드라인/파워쉘 등에서 직접 등록
+            - curl -X POST http://localhost:8083/connectors/ -H "Content-Type: application/json" -d @s3_conn_config.json
 
 - kafka connect
     - S3에 적제 담당
