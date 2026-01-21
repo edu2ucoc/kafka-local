@@ -98,27 +98,20 @@ services:
     depends_on:
       - kafka
 
-  logstash:
-    # 도커 파일로 부터 빌드후 이미지를 대상으로 컨테이너 구성 -> --build (1회)
-    build: 
-      context: ./logstash
-    container_name: logstash
-    # 설정 파일(conf)을 외부에서 작성된것이 컨테이너 내부로 공유됨 -> logstash의 설정이됨
-    # 여기에 s3, opensearch에 동시 업로드하는 구성이 세팅됨
+  fluent-bit:
+    image: fluent/fluent-bit:2.2
+    container_name: fluent-bit
     volumes:
-      - ./pipeline/:/usr/share/logstash/pipeline/
+      # 설정 파일 마운트
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
     environment:
-      # 자바로 구성된 프로그램 => logstash => 자비 힙 메모리 설정(운영)
-      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
-      # AWS 접속 정보 -> .env를 알아서 읽어서 세팅함
-      # S3 접속용 (엑세스키)
+      # AWS 환경변수 전달
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      # AWS OpenSearch 접속용 환경변수 전달 (마스터 계정)
       AWS_OPENSEARCH_HOST: ${AWS_OPENSEARCH_HOST}
       AWS_OPENSEARCH_USER: ${AWS_OPENSEARCH_USER}
       AWS_OPENSEARCH_PASS: ${AWS_OPENSEARCH_PASS}
       AWS_S3_BUCKET: ${AWS_S3_BUCKET}
     depends_on:
       - kafka
-  

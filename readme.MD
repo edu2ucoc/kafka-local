@@ -177,3 +177,16 @@ logstash:
 ## 구성
 docker compose down
 docker compose up -d --build
+
+
+# EFK
+- logstash -> Fluent-bit 교체
+## 수정
+/
+L docker-compose.yaml    # [v 수정] logstash 삭제 -> fluent-bit 추가
+L fluent-bit
+    L fluent-bit.conf    # [신규] 파이프라인 구성 (INPUT, FILTER, OUTPUT)
+    L parsers.conf       # [신규] JSON 파싱 설정
+L logstash               # [v 삭제] logstash 폴더
+L pipeline               # [v 삭제] pipeline 폴더
+L ....                   # 이외 파일들은 유지
