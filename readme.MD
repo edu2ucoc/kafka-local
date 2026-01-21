@@ -190,3 +190,12 @@ L fluent-bit
 L logstash               # [v 삭제] logstash 폴더
 L pipeline               # [v 삭제] pipeline 폴더
 L ....                   # 이외 파일들은 유지
+
+## 메세지 구조 비교
+```
+# 원본 메세지 
+{'ip': '64.79.193.226', 'timestamp': '2026-01-21T10:06:00', 'method': 'TRACE', 'url': 'http://www.schmitt.com/app/explorehome.htm', 'status_code': 394, 'user_agent': 'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.1)'}
+
+# Fluent-bit 수신 메세지
+[0] raw.logs: [[1768957560.331852339, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>112, "error"=>nil, "key"=>nil, "payload"=>{"ip"=>"64.79.193.226", "timestamp"=>"2026-01-21T10:06:00", "method"=>"TRACE", "url"=>"http://www.schmitt.com/app/explorehome.htm", "status_code"=>394, "user_agent"=>"Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.1)"}}]
+```
