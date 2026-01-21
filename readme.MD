@@ -201,3 +201,9 @@ L ....                   # 이외 파일들은 유지
 # 새로운 구조 : topic, partition, offset, error, key, payload=원본데이터
 [0] raw.logs: [[1768957560.331852339, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>112, "error"=>nil, "key"=>nil, "payload"=>{"ip"=>"64.79.193.226", "timestamp"=>"2026-01-21T10:06:00", "method"=>"TRACE", "url"=>"http://www.schmitt.com/app/explorehome.htm", "status_code"=>394, "user_agent"=>"Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.1)"}}]
 ```
+
+### payload 리프팅후 결과
+- payload 내부값이 상위 레벨로 이동, payload 키값 자체를 삭제됨
+```
+[0] raw.logs: [[1768958290.259928134, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>117, "error"=>nil, "key"=>nil, "ip"=>"107.126.76.224", "timestamp"=>"2026-01-21T10:18:09", "method"=>"HEAD", "url"=>"http://pace-scott.com/tagsmain.html", "status_code"=>417, "user_agent"=>"Mozilla/5.0 (Windows; U; Windows NT 6.1) AppleWebKit/532.31.6 (KHTML, like Gecko) Version/4.0.1 Safari/532.31.6"}]
+```
