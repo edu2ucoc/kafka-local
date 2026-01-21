@@ -207,3 +207,11 @@ L ....                   # 이외 파일들은 유지
 ```
 [0] raw.logs: [[1768958290.259928134, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>117, "error"=>nil, "key"=>nil, "ip"=>"107.126.76.224", "timestamp"=>"2026-01-21T10:18:09", "method"=>"HEAD", "url"=>"http://pace-scott.com/tagsmain.html", "status_code"=>417, "user_agent"=>"Mozilla/5.0 (Windows; U; Windows NT 6.1) AppleWebKit/532.31.6 (KHTML, like Gecko) Version/4.0.1 Safari/532.31.6"}]
 ```
+
+### 원본 복제후 결과
+- 원본과 사본에 대해 태그만 다르게 구성
+```
+[0] raw.logs: [[1768958701.710106057, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>121, "error"=>nil, "key"=>nil, "ip"=>"49.93.193.158", "timestamp"=>"2026-01-21T10:25:01", "method"=>"HEAD", "url"=>"http://mcdonald.com/listcategory.html", "status_code"=>209, "user_agent"=>"Mozilla/5.0 (iPad; CPU iPad OS 10_3_3 like Mac OS X) AppleWebKit/534.0 (KHTML, like Gecko) FxiOS/16.6y3393.0 Mobile/56J972 Safari/534.0"}]
+
+[0] processed.logs: [[1768958701.710106057, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>121, "error"=>nil, "key"=>nil, "ip"=>"49.93.193.158", "timestamp"=>"2026-01-21T10:25:01", "method"=>"HEAD", "url"=>"http://mcdonald.com/listcategory.html", "status_code"=>209, "user_agent"=>"Mozilla/5.0 (iPad; CPU iPad OS 10_3_3 like Mac OS X) AppleWebKit/534.0 (KHTML, like Gecko) FxiOS/16.6y3393.0 Mobile/56J972 Safari/534.0"}]
+```
