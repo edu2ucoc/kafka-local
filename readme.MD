@@ -215,3 +215,12 @@ L ....                   # 이외 파일들은 유지
 
 [0] processed.logs: [[1768958701.710106057, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>121, "error"=>nil, "key"=>nil, "ip"=>"49.93.193.158", "timestamp"=>"2026-01-21T10:25:01", "method"=>"HEAD", "url"=>"http://mcdonald.com/listcategory.html", "status_code"=>209, "user_agent"=>"Mozilla/5.0 (iPad; CPU iPad OS 10_3_3 like Mac OS X) AppleWebKit/534.0 (KHTML, like Gecko) FxiOS/16.6y3393.0 Mobile/56J972 Safari/534.0"}]
 ```
+
+## 복사본 전처리후
+- 삭제 명령을 내린 필드가 존재 유무에 관계없이 처리 완료 (없으면 무시되는듯)
+- 메시지를 간결하게 조정하여 오픈서치용으로 조정
+```
+[0] raw.logs: [[1768959194.159127600, {}], {"topic"=>"web_logs", "partition"=>0, "offset"=>126, "error"=>nil, "key"=>nil, "ip"=>"155.58.41.118", "timestamp"=>"2026-01-21T10:33:13", "method"=>"PUT", "url"=>"http://miller-little.com/categories/appindex.asp", "status_code"=>267, "user_agent"=>"Mozilla/5.0 (Macintosh; PPC Mac OS X 10_5_1; rv:1.9.3.20) Gecko/9850-09-07 16:47:55 Firefox/15.0"}]
+
+[0] processed.logs: [[1768959194.159127600, {}], {"ip"=>"155.58.41.118", "timestamp"=>"2026-01-21T10:33:13", "method"=>"PUT", "url"=>"http://miller-little.com/categories/appindex.asp", "status_code"=>267}]
+```
