@@ -102,11 +102,11 @@ services:
     image: fluent/fluent-bit:2.2
     container_name: fluent-bit
     volumes:
-      # 설정 파일 마운트
+      # 설정 파일 마운트 (구성파일 공유)
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
       - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
     environment:
-      # AWS 환경변수 전달
+      # AWS 환경변수 전달 (.env -> 읽어서 컴포즈에 반영 -> 컨테이너 구성 -> os 환경변수 세팅)
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_OPENSEARCH_HOST: ${AWS_OPENSEARCH_HOST}
